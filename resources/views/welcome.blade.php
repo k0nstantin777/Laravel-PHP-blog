@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel. The Best or nothing!
+                    Laravel. The Best framework on the Earth!!!
                 </div>
 
                 <div class="links">
