@@ -11,34 +11,45 @@
 |
 */
 
-Route::get('/', 'MainController@mainPage')
+Route::get('/', 'MainController@index')
         ->name('mainPage');
 
 Route::get('/404', 'MainController@notFoundPage')
         ->name('notFoundPage');
 
+Route::get('/feedback', 'PageController@feedBack')
+        ->name('feedBackPage');
+
+Route::get('/contacts', 'PageController@contacts')
+        ->name('contactsPage');
+
+Route::get('/about', 'PageController@about')
+        ->name('aboutPage');
+        
 Route::group(['prefix' => '/user'], function(){
-    Route::match(['get', 'post'], '/login', 'Client\UserController@login')
+    Route::match(['get', 'post'], '/login', 'UserController@login')
         ->name('user.login');
-    Route::match(['get', 'post'], '/reg', 'Client\UserController@reg')
+    Route::match(['get', 'post'], '/registration', 'UserController@registration')
         ->name('user.reg');
-    Route::get('/unlogin', 'Client\UserController@unlogin')
+    Route::get('/logout', 'UserController@logout')
         ->name('user.unlogin');
     
 });
 
 Route::group(['prefix' => '/post'], function(){
-    Route::get('/', 'Client\PostController@index')
+    Route::get('/', 'PostController@index')
         ->name('post.index');
-    Route::get('/{id}', 'Client\PostController@one')
-        ->name('post.one')
+    Route::get('/categories', 'PostController@categories')
+        ->name('post.categories');
+    Route::get('/{id}', 'PostController@show')
+        ->name('post.show')
         ->where('id', '[0-9]+');
-    Route::match(['get', 'post'], '/add', 'Client\PostController@add')
+    Route::match(['get', 'post'], '/add', 'PostController@add')
         ->name('post.add');
-    Route::match(['get', 'post'], '/edit/{id}', 'Client\PostController@edit')
+    Route::match(['get', 'post'], '/edit/{id}', 'PostController@edit')
         ->name('post.edit')
         ->where('id', '[0-9]+');
-    Route::get('/delete/{id}', 'Client\PostController@delete')
+    Route::get('/delete/{id}', 'PostController@delete')
         ->name('post.delete')
         ->where('id', '[0-9]+');
 });
