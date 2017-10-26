@@ -27,12 +27,16 @@ Route::get('/about', 'PageController@about')
         ->name('aboutPage');
         
 Route::group(['prefix' => '/user'], function(){
-    Route::match(['get', 'post'], '/login', 'UserController@login')
+    Route::get('/login', 'UserController@login')
         ->name('user.login');
-    Route::match(['get', 'post'], '/registration', 'UserController@registration')
-        ->name('user.reg');
+    Route::post('/login', 'UserController@loginPost')
+        ->name('user.loginPost');
+    Route::get('/registration', 'UserController@registration')
+        ->name('user.register');
+    Route::post('/registration', 'UserController@registrationPost')
+        ->name('user.registerPost');
     Route::get('/logout', 'UserController@logout')
-        ->name('user.unlogin');
+        ->name('user.logout');
     
 });
 
@@ -54,3 +58,7 @@ Route::group(['prefix' => '/post'], function(){
         ->where('id', '[0-9]+');
 });
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

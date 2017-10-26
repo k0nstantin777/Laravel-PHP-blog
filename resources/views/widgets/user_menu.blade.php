@@ -1,11 +1,9 @@
     
     <div class="user-menu">
-        @if ($user !== 'guest')
-            <span>Логин: {{$user}}, IP: {{$ip}}</span> | <a href="/logout">Выйти</a>
+        @if ($currentUser)
+            <span>Логин: {{$currentUser}}, IP: {{$ip}}</span> | <a href="/user/logout">Выйти</a>
         @else 
-            <a href="/login">Вход</a> | <a href="/registration">Регистрация</a>
+            <a href="/user/login">Вход</a> | <a href="/user/registration">Регистрация</a>
         @endif 
-        
-        
     </div>
 

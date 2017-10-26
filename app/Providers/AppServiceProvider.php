@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
-use \App\Includes\Classes\CurrentData;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Auth;
+use App\Includes\Classes\CurrentData;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,17 +17,20 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $isAuth = true;
+        Schema::defaultStringLength(191);
         
-        View::composer('*', function ($view) use ($isAuth) {
-            if ($isAuth !== true){
-                $user = 'guest'; 
+        View::composer('*', function ($view) {
+            $user = Auth::user();
+            
+            if (!Auth::check()){
+                $currentUser = false ;
+                $ip = '';
             } else {
-                $user = 'Admin';
-                $ip = getip();
+                $currentUser = $user->name;
+                $ip = getIp();
             }
             
-            $view->with('user', $user);
+            $view->with('currentUser', $currentUser);
             $view->with('ip', $ip);
         });
         

@@ -11,12 +11,10 @@ class MainController extends Controller
     
     public function index()
     {
-        $date = resolve('Data');
-        
+               
         return view('layouts.primary', [
             'page'=> 'pages.main',
             'title'=> $this->title,
-            'date'=> $date->data()            
         ]);
     }
     

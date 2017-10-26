@@ -4,7 +4,7 @@
  * Определение IP пользователя
  * @return string
  */
-function getip()
+function getIp()
 {
     if ( getenv('REMOTE_ADDR') && strcasecmp( getenv('REMOTE_ADDR'), 'unknown') )
         return getenv("REMOTE_ADDR");
@@ -21,7 +21,7 @@ function getip()
  * @param string $ip
  * @return string
  */
-function detect_city($ip) {
+function detectCity($ip) {
         
         $default = 'UNKNOWN';
  

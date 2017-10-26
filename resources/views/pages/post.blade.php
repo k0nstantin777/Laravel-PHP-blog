@@ -6,5 +6,5 @@
         
 </article>
 
-@include('parts.form_comment')
+@include('widgets.forms.comment')
 @include('widgets.footer_comments')
