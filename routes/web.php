@@ -56,9 +56,9 @@ Route::group(['prefix' => '/post'], function(){
     Route::get('/delete/{id}', 'PostController@delete')
         ->name('post.delete')
         ->where('id', '[0-9]+');
+    Route::post('/{id}/comment/add', 'PostController@addComment')
+        ->name('post.addComment')
+        ->where('id', '[0-9]+');
+        
 });
 
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

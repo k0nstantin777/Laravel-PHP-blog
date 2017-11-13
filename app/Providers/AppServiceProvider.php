@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Auth;
 use App\Includes\Classes\CurrentData;
+use App\Models\Comment;
+use App\Models\Category;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
                 $currentUser = false ;
                 $ip = '';
             } else {
-                $currentUser = $user->name;
+                $currentUser = $user;
                 $ip = getIp();
             }
             
@@ -34,7 +36,18 @@ class AppServiceProvider extends ServiceProvider
             $view->with('ip', $ip);
         });
         
+        View::composer('widgets.footer_comments', function ($view) {
+            $comments = Comment::orderBy('created_at', 'desc')->limit(5)->get();
+            
+            $view->with('comments', $comments);
+        });
         
+        View::composer('widgets.categories', function ($view) {
+            $categories = Category::orderBy('name', 'ASC')->get();
+            
+            $view->with('categories', $categories);
+        });
+                
     }
 
     /**
