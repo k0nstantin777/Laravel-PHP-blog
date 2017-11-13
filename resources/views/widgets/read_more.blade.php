@@ -1,1 +1,1 @@
-<p><a class="more" href="index.html">continue reading &raquo;</a></p>
+<p><a class="more" href="{{route('post.show', $post->id)}}">Читать дальше &raquo;</a></p>

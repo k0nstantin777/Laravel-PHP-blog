@@ -2,18 +2,21 @@
 <!--[if IE 7 ]>    <html class="ie7 oldie"> <![endif]-->
 <!--[if IE 8 ]>    <html class="ie8 oldie"> <![endif]-->
 <!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html> <!--<![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="{{ app()->getLocale() }}"> <!--<![endif]-->
 
 <head>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
     <base href="{{ route('mainPage')}}">
     <title>{{$title}}</title>
     
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/coolblue.css" />
+    <link rel="shortcut icon" href="images/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/coolblue.css" />
+    
 
     <!--[if lt IE 9]>
 	    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -23,37 +26,28 @@
     <script>window.jQuery || document.write('<script src="js/jquery-1.6.1.min.js"><\/script>')</script>
 
     <script src="js/scrollToTop.js"></script>
-    @section('head_styles')
-    @show
-    
-    @section('head_scripts')
-    @show
-    
+    @yield('head_styles')
+        
+    @yield('head_scripts')
+   
 </head>
 
 <body id="top">
 
 <!--header -->
-@section('header')
-@show
+@yield('header')
 <!--/header-->
-
 	
 <!-- content-wrap -->
-@section('content')
-@show
-
+@yield('content')
 <!-- /content-out -->
 
 <!-- extra -->
-@section('footer_first')
-@show
+@yield('footer_first')
 <!-- /extra -->
 
 <!-- footer -->
-@section('footer_second')
-@show
-
+@yield('footer_second')
 <!-- /footer -->
 </body>
 </html>

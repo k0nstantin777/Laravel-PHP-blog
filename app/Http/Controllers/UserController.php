@@ -38,20 +38,7 @@ class UserController extends MainController
             'email' => $request->input('email'),
             'password' => $request->input('pass')
         ], $remember);
-        
-        /*иммитация метода Auth::attempt
-            $user = DB::table('users')
-                        ->select('*')
-                        ->where('email','=', $request->input('email'))
-                        ->first();
-            if (Hash::check($request->input('pass'), $user->password)){
-                Auth::loginUsingId($user->id, $remember);
-                $authResult = true;
-            } else {
-                $authResult = false;
-            }    
-        */
-                
+                           
         if (!$authResult){
             return redirect()
                ->route('user.login')
@@ -86,7 +73,6 @@ class UserController extends MainController
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password'=> bcrypt($request->input('pass')),
-            'phone'=> $request->input('phone'),
             'created_at'=> Carbon::createFromTimestamp(time())
                 ->format('Y-m-d H:i:s'),
             'updated_at'=> Carbon::createFromTimestamp(time())

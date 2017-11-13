@@ -7,15 +7,6 @@ use \App\Includes\Classes\CurrentData;
 
 class PageController extends MainController
 {
-    
-    protected $date;
-
-
-    public function __construct(CurrentData $date)
-    {
-        $this->date = $date;
-    }
-        
     public function feedBack(){
         $this->title = 'Обратная связь';
 
@@ -40,7 +31,7 @@ class PageController extends MainController
         return view('layouts.primary', [
             'page'=>'pages.about',
             'title'=> $this->title,
-            'date' => $this->date->all()
+            
         ]);
     }
 }
