@@ -34,6 +34,11 @@ class FormatData
         $month = date("M", $this->getTimestamp($timestamp));
         return strtoupper($month);
     }
+    
+    public function dataLocale($timestamp = '')
+    {
+        return date('Y-m-d\TH:i:s', $this->getTimestamp($timestamp));
+    }
        
     private function getTimestamp($timestamp)
     {

@@ -1,0 +1,1 @@
+<p><a class="more" href="{{route('post.show', $post->slug)}}">Читать дальше &raquo;</a></p>

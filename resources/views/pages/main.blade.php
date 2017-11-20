@@ -1,7 +1,5 @@
-@if (session('register'))
-    <div class="alert alert-success">
-        <p>{{session('register')}}</p>
-    </div>
-@endif
+<div class="title_page">
+     Главная страница
+</div>
 
 @include('pages.posts')

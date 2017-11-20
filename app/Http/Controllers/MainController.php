@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Post;
 use App\Models\Category;
 use App\Includes\Classes\FormatData;
+use Illuminate\Support\Carbon;
 
 class MainController extends Controller
 {
@@ -27,29 +28,5 @@ class MainController extends Controller
     {
         $this->data = $data;
     }
-    
-    public function index()
-    {
-        $posts = Post::orderBy('created_at', 'DESC')
-            ->where('is_active', 1)
-            ->withCount('tags')
-            ->withCount('comments')
-            ->withCount('categories')
-            ->get();
-        
-        return view('layouts.primary', [
-            'page'=> 'pages.main',
-            'title'=> $this->title,
-            'data' => $this->data,
-            'posts' => $posts,
-        ]);
-    }
-    
-    public function notFoundPage()
-    {
-        return view ('404');
-    }
-    
-      
-       
+            
 }

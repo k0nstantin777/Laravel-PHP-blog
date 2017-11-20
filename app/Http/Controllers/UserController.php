@@ -41,7 +41,7 @@ class UserController extends MainController
                            
         if (!$authResult){
             return redirect()
-               ->route('user.login')
+               ->route('login')
                ->with('authError', 'Неверный логин или пароль');  
         } 
                
@@ -81,7 +81,7 @@ class UserController extends MainController
         
         return redirect()
             ->route('mainPage')
-            ->with('register', 'Регистрация прошла успешно!');
+            ->with('action', 'Регистрация прошла успешно!');
     }
     
     /**

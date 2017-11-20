@@ -1,15 +1,16 @@
 <div id="header-wrap"><header>
 
- @include('widgets.logo')
+ @include('widgets.header.logo')
 
     <nav>
-        @include('widgets.menu')
+        @include('widgets.header.menu')
     </nav>
  
-    @include('widgets.user_menu')
+    @include('widgets.header.user_menu')
 
-   
-    @include('widgets.search')
+    @include('widgets.header.action')
+    
+    @include('widgets.header.search')
 
 </header></div>
 

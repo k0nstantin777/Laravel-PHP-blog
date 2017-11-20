@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use App\Models\Category;
+use App\Models\Post;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -25,9 +27,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Route::model('category', Category::class);
+        Route::model('post', Post::class);
 
         parent::boot();
+       
     }
 
     /**
@@ -38,12 +42,10 @@ class RouteServiceProvider extends ServiceProvider
     public function map()
     {
         $this->mapApiRoutes();
-
         $this->mapWebRoutes();
-        
         $this->mapAdminRoutes();
-
-        //
+        $this->mapImageRoutes();
+        $this->mapDownloadRoutes();
     }
 
     /**
@@ -88,5 +90,34 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
+    }
+    
+    /**
+     * Define the "images" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapImageRoutes()
+    {
+        Route::middleware('web')
+            ->prefix('/image')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/image.php'));
+    }
+    /**
+     * Define the "download" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapDownloadRoutes()
+    {
+        Route::middleware('web')
+            ->prefix('/file')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/file.php'));
     }
 }

@@ -1,5 +1,5 @@
 <h3>Регистрация</h3>
-<form name="registration" action="{{route('user.registerPost')}}" method="post">
+<form name="registration" action="{{route('registerPost')}}" method="post">
  {{ csrf_field() }}
 
     <label for="name">Имя</label>

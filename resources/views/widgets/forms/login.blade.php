@@ -1,5 +1,5 @@
 <h3>Авторизация</h3>
-<form name="registration" action="{{route('user.loginPost')}}" method="post">
+<form name="registration" action="{{route('loginPost')}}" method="post">
  {{ csrf_field() }}
 
 

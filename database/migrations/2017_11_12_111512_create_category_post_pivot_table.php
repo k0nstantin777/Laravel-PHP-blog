@@ -22,6 +22,7 @@ class CreateCategoryPostPivotTable extends Migration
                 ->on('categories')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+               
             
             $table->integer('post_id')
                 ->unsigned()
@@ -43,6 +44,6 @@ class CreateCategoryPostPivotTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_category');
+        Schema::dropIfExists('category_post');
     }
 }

@@ -1,2 +1,2 @@
-@include ('widgets.footer_contacts')
+@include ('widgets.footer.contacts')
 

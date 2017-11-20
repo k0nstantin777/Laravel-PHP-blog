@@ -101,7 +101,7 @@ function commentsCountEnding($count){
  * @param int $count
  * @return string
  */    
-function commentsTagsEnding($count){
+function tagsCountEnding($count){
     $mod = $count%10;
     if ($mod == 1 && $count != 11){
         return '';
@@ -123,7 +123,7 @@ function commentsTagsEnding($count){
  * @param int $count
  * @return string
  */    
-function commentsCategoriesEnding($count){
+function catsCountEnding($count){
     $mod = $count%10;
     if ($mod == 1 && $count != 11){
         return 'я';
@@ -136,12 +136,12 @@ function commentsCategoriesEnding($count){
         
 }  
 
-function getCommentSlug($title){
-    $arr = explode(' ', $title);
-    if (count($arr) < 5){
-        return $title;
-    }
-    
-    return sprintf('%s...', implode(' ',array_slice($arr, 0, 5)));
-    
-}
+//function getCommentSlug($title){
+//    $arr = explode(' ', $title);
+//    if (count($arr) < 5){
+//        return $title;
+//    }
+//    
+//    return sprintf('%s...', implode(' ',array_slice($arr, 0, 5)));
+//    
+//}

@@ -1,1 +1,1 @@
-@include('widgets.categories')
+@include('widgets.sidebar.categories')

@@ -148,7 +148,7 @@ dd {
     padding-left: 20px;
 }
 
-p, dl { margin: 0 0 24px 0; }
+p, dl { margin: 0 0 10px 0; }
 
 blockquote {
   	margin: 12px 0;
@@ -204,7 +204,7 @@ strong, b {
 img {
     background: #F3F4F5;
     border: 1px solid #DEDFE0;
-	padding: 15px;
+    padding: 7px;
 
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -288,9 +288,14 @@ form textarea {
   	border-color: #DCDEE2 #E9EBED #E9EBED #DCDEE2;
 	font: 13px 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Verdana, Sans-serif;
 }
-form textarea {
+form textarea#body {
     height: 125px;
 }
+
+form textarea#announce {
+    height: 65px;
+}
+
 form input:focus,
 form select:focus,
 form textarea:focus {
@@ -321,7 +326,7 @@ form input.button{
 .ie7 form input.button {
     padding: 0 2px;
 }
-#name, #email, #message, #website, #sub, #body, #pass, #pass_repeat, #phone, #title {
+#name, #email, #message, #website, #sub, #body, #pass, #pass_repeat, #phone, #title, #announce {
 	width: 475px;
 }
 
@@ -341,6 +346,10 @@ form span.error{
 
 form input.error, form textarea.error{
     border-color: red !important;
+}
+
+span.input-info{
+    font-size:0.7em;
 }
 
 /* Clearing and Alignment */
@@ -406,7 +415,7 @@ header {
 
 #sidebar {
     float: right;
-    margin: 45px 0 24px 0;
+    margin: 25px 0 24px 0;
     padding: 0;
     width: 222px;
 }
@@ -593,6 +602,18 @@ header .search button.btn {
   	background: url(../images/search.png) no-repeat center center;
 }
 
+header .action{
+    position: absolute;
+    top: 110px;
+    left: 350px;
+    background-color: #307faf;
+    color: white;
+    padding: 10px;
+    border-radius: 20px;
+    font-size: 30px;
+    font-family: sans-serif;
+}
+
 /* -------------------------------------------------------------------------
     M A I N
 --------------------------------------------------------------------------- */
@@ -605,14 +626,23 @@ header .search button.btn {
 /* --------------------------------------------------------------------------
     S I D E B A R
 ---------------------------------------------------------------------------- */
+.sidebar_widget{
+    margin: 15px 0;
+    border: 1px solid silver;
+    padding: 0 7px 7px 7px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 12px silver;
+}
+
+
 #sidebar h3 {
     letter-spacing: 0.2px;
-    margin-top: 10px;
-    margin-bottom: 14px;
+    margin-top: 5px;
+    margin-bottom: 7px;
 }
 #sidebar .about-me img {
     margin: 0 15px 5px 0;
-    padding: 10px;
+    padding: 5px;
 
     box-shadow: none;
     -moz-box-shadow: none;
@@ -621,7 +651,7 @@ header .search button.btn {
 
 /* Sidemenu */
 .sidemenu ul {
-	margin: 5px 0 24px 0;
+	margin: 5px 0 10px 0;
     padding: 0;
 	border-top:  1px  solid #E5E5E5;
     color: #959595
@@ -722,19 +752,36 @@ header .search button.btn {
 
 /* Recent Comments */
 .recent-comments ul {
-   	margin-left: 0;
+    margin-left: 0;
     padding: 0;
-	background: url(../images/footer-line.png) repeat-x left top;
+	/*background: url(../images/footer-line.png) repeat-x left top;*/
     font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Verdana, sans-serif;
 }
+
+#extra .recent-comments ul{
+    background: url(../images/footer-line.png) repeat-x left top;
+}
+
 .recent-comments ul li {
 	list-style: none;
 	font-size: 12px;
 	line-height: 1.5em;
-	padding: 7px 5px 7px 22px;
-	background: url(../images/speech-bubble.png)  no-repeat  2px 12px;
+	padding: 7px 5px 7px 0px;
+	/*background: url(../images/speech-bubble.png)  no-repeat  2px 12px;*/
     /* border-bottom: 1px solid #326B8D; */
 }
+
+#extra .recent-comments ul li{
+    background: url(../images/speech-bubble.png)  no-repeat  2px 12px;
+    padding: 7px 5px 7px 20px;
+}
+
+.recent-comments ul li i{
+    font-size: 16px;
+    padding: 0 5px;
+    color:#666666;
+}
+
 .recent-comments ul li a:link,
 .recent-comments ul li a:visited {
     padding-left: 0;
@@ -742,6 +789,7 @@ header .search button.btn {
 .recent-comments ul li cite {
 	font-size: .9em;
 	font-style: normal;
+        padding: 0 20px;
 }
 
 /* footer-list */
@@ -816,7 +864,7 @@ footer p.footer-right {
 		B L O G   P O S T
 --------------------------------------------------------------------------------- */
 .post {
-    margin: 0 0 20px 0;
+    margin: 10px 0 20px 0;
     padding: 0 0 20px 0;
     width: 726px;
     overflow: hidden;
@@ -859,8 +907,19 @@ footer p.footer-right {
     float: left;
 }
 
+.title_page{
+    text-align: center;
+    padding: 10px;
+    font-size: 1.6em;
+    border-bottom: 1px solid #E5E5E5;
+}
+
 p.text{
     text-align: justify;
+}
+
+p.center{
+    text-align: center;
 }
 
 aside {
@@ -924,6 +983,12 @@ aside .post-meta ul li {
     color: #666666;
 }
 
+aside .post-meta ul li i{
+    float: left;
+    padding: 3px;
+    font-size: 1.4em;
+}
+
 aside .post-meta ul li.tags { background: url(../images/tag.png) no-repeat 2px center; }
 aside .post-meta ul li.user { background: url(../images/user.png) no-repeat 2px center; }
 aside .post-meta ul li.time { background: url(../images/clock.png) no-repeat 2px center; }
@@ -977,7 +1042,7 @@ aside .post-meta ul li a:hover { color: #CC3300; }
 }
 .post-info span {
     font-style: italic;
-    margin-right: 3px;
+        margin: 0 15px;
 }
 
 .post-info li.tags {background: url(../images/tag.png) no-repeat 2px center; }
@@ -986,12 +1051,15 @@ aside .post-meta ul li a:hover { color: #CC3300; }
 .post-info ul {
     list-style: none;
     margin: 0 10px;
-    padding: 0;
-/*    border-top: 1px solid #E5E5E5;*/
+/*    padding: 0;*/
+    border: 1px solid #E5E5E5;
+    padding: 5px;
+    box-shadow: 1px 1px 10px silver;
+
 }
 
 .post-info li{
-    padding: 0 0 0 25px;
+/*    padding: 0 0 0 25px;*/
     margin: 3px 0;
 /*    text-align: right;*/
 /*    border-bottom: 1px solid #E5E5E5;*/
@@ -999,6 +1067,23 @@ aside .post-meta ul li a:hover { color: #CC3300; }
     font-size: 12px;
     color: #666666;
 }
+
+.post-info li i {
+    float: left;
+    padding: 2px 5px;;
+    font-size: 1.4em;
+}
+
+.post-info li p {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+p#count{
+    font-size: 1.8em;
+}
+
 .post .post-info a:link,
 .post .post-info a:visited {
   	color: #1372a8;

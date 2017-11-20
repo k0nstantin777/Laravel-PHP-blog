@@ -3,19 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/bumer/www/laravel.loc/resources/views/widgets/forms/comment.blade.php</file>
-            <file>file:/home/bumer/www/laravel.loc/app/Http/Controllers/UserController.php</file>
-            <file>file:/home/bumer/www/laravel.loc/resources/views/parts/post.blade.php</file>
-            <file>file:/home/bumer/www/laravel.loc/resources/views/widgets/forms/register.blade.php</file>
-            <file>file:/home/bumer/www/laravel.loc/resources/views/widgets/aside.blade.php</file>
-            <file>file:/home/bumer/www/laravel.loc/public/css/coolblue.css</file>
-            <file>file:/home/bumer/www/laravel.loc/resources/views/widgets/post_comments.blade.php</file>
-            <file>file:/home/bumer/www/laravel.loc/routes/web.php</file>
-            <file>file:/home/bumer/www/laravel.loc/resources/views/pages/main.blade.php</file>
+            <file>file:/home/bumer/www/laravel.loc/resources/views/widgets/forms/create.blade.php</file>
             <file>file:/home/bumer/www/laravel.loc/resources/views/pages/post.blade.php</file>
-            <file>file:/home/bumer/www/laravel.loc/app/Models/User.php</file>
+            <file>file:/home/bumer/www/laravel.loc/resources/views/widgets/header/menu.blade.php</file>
+            <file>file:/home/bumer/www/laravel.loc/app/Providers/IncludeServiceProvider.php</file>
+            <file>file:/home/bumer/www/laravel.loc/public/css/coolblue.css</file>
             <file>file:/home/bumer/www/laravel.loc/app/Http/Controllers/PostController.php</file>
-            <file>file:/home/bumer/www/laravel.loc/app/Http/Controllers/MainController.php</file>
+            <file>file:/home/bumer/www/laravel.loc/app/Providers/AuthServiceProvider.php</file>
+            <file>file:/home/bumer/www/laravel.loc/resources/views/errors/default.blade.php</file>
+            <file>file:/home/bumer/www/laravel.loc/routes/web.php</file>
         </group>
     </open-files>
 </project-private>

@@ -5,10 +5,10 @@
 @endif
 
 @if(!Auth::check())
-    <p>Что бы оставить комментарий необходимо <a href="{{route('user.login')}}">авторизоваться</a> или <a href="{{route('user.register')}}">зарегестироваться</a>.</p>
+    <p>Что бы оставить комментарий необходимо <a href="{{route('login')}}">авторизоваться</a> или <a href="{{route('register')}}">зарегестироваться</a>.</p>
 @else
     <h3>Оставьте комментарий</h3>
-    <form name="comment" action="{{route('post.addComment', $post->id)}}" method="post">
+    <form name="comment" action="{{route('post.createComment', $post->id)}}" method="post">
     {{ csrf_field() }}    
 
     <input type="hidden" name="post_id" value="{{$post->id}}" />
