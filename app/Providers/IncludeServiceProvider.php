@@ -14,6 +14,7 @@ class IncludeServiceProvider extends ServiceProvider
     public function boot()
     {
         require_once (app_path('Includes/Helpers/helpers.php'));
+        require_once (app_path('Includes/Helpers/url_slug.php'));
     }
 
     /**

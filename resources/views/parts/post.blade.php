@@ -1,6 +1,6 @@
 
 
-<h3><a href="{{route('post.show', $post->id)}}">{{$post->title}}</a></h3>
+<h3><a href="{{route('post.show', $post->slug)}}">{{$post->title}}</a></h3>
 
 <div class="image-section">
         <img src="{{$post->image}}" alt="image post" height="206" width="498"/>

@@ -16,6 +16,7 @@
     
     <link rel="shortcut icon" href="images/favicon.ico"/>
     <link rel="stylesheet" type="text/css" media="screen" href="css/coolblue.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css">
     
 
     <!--[if lt IE 9]>
@@ -25,7 +26,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/jquery-1.6.1.min.js"><\/script>')</script>
 
-    <script src="js/scrollToTop.js"></script>
+    <script src="js/script.js"></script>
     @yield('head_styles')
         
     @yield('head_scripts')

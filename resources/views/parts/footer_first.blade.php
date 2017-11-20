@@ -2,19 +2,19 @@
     <div id="extra" class="clearfix">
    	    
         <div class="col first">
-            @include('widgets.footer_contacts') 
+            @include('widgets.footer.contacts') 
         </div>
 
         <div class="col">
-            @include('widgets.footer_menu') 
+            @include('widgets.footer.menu') 
         </div>
 
         <div class="col">
-            @include('widgets.footer_comments') 
+            @include('widgets.footer.comments') 
         </div>
 
         <div class="col">
-            @include('widgets.footer_archive')
+            @include('widgets.footer.archive')
         </div>
 
 
