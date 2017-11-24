@@ -12,8 +12,8 @@ class PriveRoleTableSeeder extends Seeder
      */
     public function run()
     {
-        Role::find(1)->prives()->attach([1,2]);
-        Role::find(2)->prives()->attach([1,3]);
-        Role::find(3)->prives()->attach([1,3,4]);
+        Role::find(1)->prives()->attach([1,2,5]);
+        Role::find(2)->prives()->attach([1,3,5]);
+        Role::find(3)->prives()->attach([1,3,4,5]);
     }
 }

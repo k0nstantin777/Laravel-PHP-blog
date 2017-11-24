@@ -6,10 +6,11 @@
         <h2>{{$post->title}}</h2>
 
         <div class="image-section">
-                <img src="{{$post->image}}" alt="image post" height="256" width="498"/>
+                <img src="{{stripos($post->image, 'http') !== false ? $post->image : config('blog.userImagesPath').$post->image}}" alt="image post" height="256" width="498"/>
         </div>
-
+        
         <p class="text">{{$post->fulltext}}</p>
+        <div class='clearfix'></div>
         @include ('widgets.post.info')
         @include('widgets.post.options')
     @endif

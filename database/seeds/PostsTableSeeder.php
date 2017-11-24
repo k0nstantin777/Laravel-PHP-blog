@@ -63,7 +63,6 @@ class PostsTableSeeder extends Seeder
                 'title' => $faker->realText(50),
                 'tagline' => $faker->realText(30),
                 'user_id' => mt_rand(1,3),
-                //'image' => 'https://imgholder.ru/1280x720/0082d5/eceff4&text=%D0%9A%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D0%B0%20%D0%B1%D0%BB%D0%BE%D0%B3%D0%B0&font=kelson',
                 'image' => 'https://picsum.photos/1280/720?random',
                 'slug' => sha1(str_random(16) . microtime(true)),
                 'announce' => $faker->realText(300),

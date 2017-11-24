@@ -11,12 +11,12 @@ class FormatData
 {
     public function all($timestamp = '')
     {
-        return date("H:i:s d-m-Y", $this->getTimestamp($timestamp));
+        return date("H:i d.m.Y", $this->getTimestamp($timestamp));
     }
     
     public function time($timestamp = '')
     {
-        return date("H:i:s", $this->getTimestamp($timestamp));
+        return date("H:i", $this->getTimestamp($timestamp));
     }
     
     public function data($timestamp = '')

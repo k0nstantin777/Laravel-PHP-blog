@@ -11,7 +11,55 @@ class Uploader
         $request,
         $props,
         $uploadPath,
-        $validationErrors = [];
+        $validationErrors = [],
+        $uploadModel;
+    
+    public function __construct(Upload $uploadModel)
+    {
+        $this->uploadModel = $uploadModel;
+    }
+    
+    public function processUpload(Request $request)
+    {
+        $rules = [
+            'maxSize' => 10 * 1024 * 1024,
+            'minSize' => 10 * 1024,
+            'allowedExt' => [
+                'jpeg',
+                'jpg',
+                'png',
+                'gif',
+                'bmp',
+                'tiff',
+                'pdf'
+            ],
+            'allowedMime' => [
+                'image/jpeg',
+                'image/png',
+                'image/gif',
+                'image/bmp',
+                'image/tiff',
+                'application/pdf'
+            ],
+        ];
+
+        if ($this->validate($request, 'file', $rules)) {
+            $uploadedPath = $this->upload('images');
+
+            if ($uploadedPath !== false) {
+                $this->register($this->uploadModel);
+                $this->getProps();
+            }
+            
+            return $uploadedPath;
+            
+        }
+        else {
+            return config('blog.imageDefaultPath');
+        }
+
+        //return $uploader->getErrors();
+    }
     
     public function validate(Request $request, $file, array $rules = [])
     {
@@ -58,9 +106,11 @@ class Uploader
     {
         $basePath = !is_null($section) ?  config('blog.uploadPath', storage_path()) . '/'. $section : config('blog.uploadPath', storage_path()) . '/' . config('blog.defaultUploadSection', 'files');
         $newName = sha1($this->props['oldname'] . microtime(true));
-        $newDir = substr($newName, 0, 1) . '/' . substr($newName, 0, 3);
-        $this->uploadPath = str_replace('/', '.', $newDir . '/' . $newName);
-        $newPath = $basePath . '/' . $newDir;
+        //$newDir = substr($newName, 0, 1) . '/' . substr($newName, 0, 3);
+        //$this->uploadPath = str_replace('/', '.', $newDir . '/' . $newName);
+        $this->uploadPath = $newName;
+        //$newPath = $basePath . '/' . $newDir;
+        $newPath = $basePath;
         if (!File::exists($newPath)) {
             if (!File::makeDirectory($newPath, config('blog.storagePermissions', 0755), true)) {
                 throw new \ErrorException('Не могу создать директорию ' . $newPath);
@@ -76,7 +126,7 @@ class Uploader
     
     public function register(Upload $uploadModel)
     {
-        return $uploadModel->create([
+        return $this->uploadModel->create([
             'path' => $this->uploadPath,
             'oldname' => $this->props['oldname'],
             'size' => $this->props['size'],
@@ -92,7 +142,7 @@ class Uploader
     
     public function getProps()
     {
-        return $this->props;
+        return $this->props ?? '';
     }
     
     protected function clearState()
@@ -108,4 +158,5 @@ class Uploader
         $this->props['ext'] = mb_strtolower($this->file->getClientOriginalExtension());
         $this->props['mime'] = $this->file->getMimeType();
     }
+        
 }

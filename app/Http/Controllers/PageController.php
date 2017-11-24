@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use \App\Includes\Classes\CurrentData;
+use App\Http\Requests\FeedBackFormRequest;
+use App\Events\FeedbackCreated;
 
 class PageController extends MainController
 {
+    /**
+     * Страница обратной связи 
+     * @return string
+     */
     public function feedBack(){
         $this->title = 'Обратная связь';
 
@@ -16,6 +20,24 @@ class PageController extends MainController
         ]);
     }
     
+    /**
+     * Обработка формы обратной связи
+     * @param FeedBackFormRequest $request
+     * @return void
+     */
+    public function feedBackPost(FeedBackFormRequest $request){
+                
+        event(new FeedbackCreated($request->all()));
+                        
+        return redirect()
+                ->route('feedBackPage')
+                ->with('message', 'Сообщение отправлено!');
+    }
+    
+    /**
+     * Страница Контакты
+     * @return string
+     */
     public function contacts(){
         $this->title = 'Контакты';
 
@@ -25,6 +47,10 @@ class PageController extends MainController
         ]);
     }
     
+    /**
+     * Страница Обо мне
+     * @return string
+     */
     public function about(){
         $this->title = 'Обо мне';
 

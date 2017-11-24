@@ -12,7 +12,7 @@ class PrivesTableSeeder extends Seeder
      */
     public function run()
     {
-        /**
+       /**
         * 1
         */
        Prive::create([
@@ -42,6 +42,14 @@ class PrivesTableSeeder extends Seeder
        Prive::create([
            'name' => 'post_delete',
            'discription' => 'Удаление постов'
+       ]);
+       
+       /**
+        * 5
+        */
+       Prive::create([
+           'name' => 'comment_create',
+           'discription' => 'Создание комментариев к постам'
        ]);
        
     }
