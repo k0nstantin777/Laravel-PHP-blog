@@ -21,7 +21,6 @@ class PostController extends MainController
     
     public function index(Request $request)
     {
-        //phpinfo();
         $posts = Post::with('user', 'tags', 'categories', 'comments')
                     ->orderBy('created_at', 'DESC')
                     ->actual()
@@ -289,6 +288,7 @@ class PostController extends MainController
     private function getTags($tags)
     {
         $arr_tags = [];
+
         for ($i=0; $i< count($tags); $i++){
             $tag = Tag::firstOrCreate([
                 'name' => $tags[$i],
