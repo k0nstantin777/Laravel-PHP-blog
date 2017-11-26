@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\FormRegisterRequest;
-use Illuminate\Support\Facades\DB;
+use App\Http\Requests\RegisterFormRequest;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Carbon;
+use App\Events\UserRegistered;
 
 class UserController extends MainController
 {
@@ -67,18 +66,10 @@ class UserController extends MainController
      * @param Request $request
      * @return array|void
      */
-    public function registrationPost(FormRegisterRequest $request)
+    public function registrationPost(RegisterFormRequest $request)
     {
-        DB::table('users')->insert([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password'=> bcrypt($request->input('pass')),
-            'created_at'=> Carbon::createFromTimestamp(time())
-                ->format('Y-m-d H:i:s'),
-            'updated_at'=> Carbon::createFromTimestamp(time())
-                ->format('Y-m-d H:i:s'),    
-        ]);
-        
+        event(new UserRegistered($request->all()));
+               
         return redirect()
             ->route('mainPage')
             ->with('action', 'Регистрация прошла успешно!');

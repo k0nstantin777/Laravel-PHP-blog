@@ -6,7 +6,7 @@
             <h4>Инфо о посте</h4>
         <ul>
            <li title="Автор поста"><i class="fa fa-user" aria-hidden="true"></i><a href="#">{{$post->user->name}}</a></li>
-           <li title="Дата создания"><i class="fa fa-clock-o" aria-hidden="true"></i>{{$data->time($post->created_at)}}</li>
+           <li title="Дата создания"><i class="fa fa-clock-o" aria-hidden="true"></i>{{$data->all($post->created_at)}}</li>
            <li title="Количество комментов"><i class="fa fa-comments" aria-hidden="true"></i><a href="#">{{$post->comments->count('id')}} комментари{{commentsCountEnding($post->comments->count('id'))}}</a></li>
            <li title="Теги: @foreach ($post->tags as $tag){{$tag->name . '  '}}@endforeach">
                <i class="fa fa-tags" aria-hidden="true"></i>{{$post->tags->count('id')}} тег{{tagsCountEnding($post->tags->count('id'))}}

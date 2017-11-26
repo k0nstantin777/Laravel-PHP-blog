@@ -14,11 +14,10 @@
 Route::get('/', 'PostController@index')
         ->name('mainPage');
 
-Route::get('/404', 'MainController@notFoundPage')
-        ->name('notFoundPage');
-
 Route::get('/feedback', 'PageController@feedBack')
         ->name('feedBackPage');
+Route::post('/feedback', 'PageController@feedBackPost')
+        ->name('feedBackPagePost');
 
 Route::get('/contacts', 'PageController@contacts')
         ->name('contactsPage');
@@ -50,7 +49,10 @@ Route::group(['prefix' => '/post'], function(){
         ->where('slug', '[a-zA-Z0-9-]+');
     Route::get('/tag/{name}', 'PostController@postsByTag')
         ->name('post.tag.show')
-        ->where('name', '[а-яА-Яa-zA-Z0-9-]+');
+        ->where('name', '[а-яА-Яa-zA-Z0-9- ]+');
+    Route::get('/archive/{date}', 'PostController@postsByDate')
+        ->name('post.archive.show')
+        ->where('data', '[а-яА-Яa-zA-Z0-9- ]+');
     Route::get('/create', 'PostController@create')
         ->name('post.create')
         ->middleware('auth');
@@ -69,20 +71,16 @@ Route::group(['prefix' => '/post'], function(){
         ->name('post.delete')
         ->where('slug', '[a-zA-Z0-9-]+')
         ->middleware('auth');
-    Route::post('/{id}/comment/create', 'PostController@createComment')
+    Route::post('/{slug}/comment/create', 'PostController@createComment')
         ->name('post.createComment')
-        ->where('id', '[0-9]+');
+        ->where('slug', '[a-zA-Z0-9-]+');
     
       
 });
 
 Route::group(['prefix' => '/category'], function(){
-        Route::get('/', function(){
-            return view('layouts.primary', [
-                'page'=>'pages.categories',
-                'title'=> 'Категории'
-            ]);  
-        })->name('post.categories');
+        Route::get('/', 'PageController@categories'            
+        )->name('post.categories');
         Route::get('/{category}', 'PostController@postsByCat')
             ->name('category.show')
             ->where('slug', '[a-zA-Z0-9-]+');

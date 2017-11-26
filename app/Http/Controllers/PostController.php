@@ -7,10 +7,13 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\Category;
-use App\Http\Requests\FormPostRequest;
-use App\Http\Requests\FormEditPostRequest;
+use App\Http\Requests\PostFormRequest;
+use App\Http\Requests\EditPostFormRequest;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Cache;
+use App\Http\Requests\CommentFormRequest;
+use App\Includes\Classes\Uploader;
 
 
 class PostController extends MainController
@@ -18,13 +21,12 @@ class PostController extends MainController
     
     public function index(Request $request)
     {
-        $posts = Post::orderBy('created_at', 'DESC')
-            ->where('is_active', 1)
-            ->where('active_from', '<' , Carbon::now())
-            ->where('active_to', '>' , Carbon::now())
-            ->orWhere('active_to', null)
-            ->get();
-               
+        //phpinfo();
+        $posts = Post::with('user', 'tags', 'categories', 'comments')
+                    ->orderBy('created_at', 'DESC')
+                    ->actual()
+                    ->paginate(4);
+                       
         return view('layouts.primary', [
             'page'=> 'pages.main',
             'title'=> $this->title,
@@ -35,8 +37,8 @@ class PostController extends MainController
        
     /**
      * Страница поста
-     * @param type $id
-     * @return type
+     * @param object $post
+     * @return string
      */
     public function show($post)
     {
@@ -53,17 +55,19 @@ class PostController extends MainController
         ]);
     }
     
+    /**
+     * Посты по категории
+     * @param object $cat
+     * @return string
+     */
     public function postsByCat ($cat)
     {
         $this->title = $cat->name;
         $this->viewsCountAdd($cat);
-        $posts = $cat->posts()->orderBy('created_at', 'desc')
-            ->where('is_active', 1)
-            ->where('active_from', '<' , Carbon::now())
-            ->where(function($query){
-                $query->where('active_to', '>' , Carbon::now())
-                      ->orWhere('active_to', null);
-            })->get();
+        $posts = $cat->posts()
+            ->orderBy('created_at', 'desc')
+            ->actual()
+            ->paginate(4);
         
         return view('layouts.primary', [
             'page'=> 'pages.category',
@@ -74,6 +78,11 @@ class PostController extends MainController
         ]);
     }
     
+    /**
+     * Посты по тегу 
+     * @param string $name
+     * @return string
+     */
     public function postsByTag ($name)
     {
         $tag = Tag::where('name', $name)->first();
@@ -81,11 +90,8 @@ class PostController extends MainController
       
         $posts = $tag->posts()->orderBy('created_at', 'desc')
             ->where('is_active', 1)
-            ->where('active_from', '<' , Carbon::now())
-            ->where(function($query){
-                $query->where('active_to', '>' , Carbon::now())
-                      ->orWhere('active_to', null);
-            })->get();
+            ->actual()
+            ->paginate(4);
         
         return view('layouts.primary', [
             'page'=> 'pages.tag',
@@ -96,6 +102,35 @@ class PostController extends MainController
         ]);
     }
     
+    /**
+     * Посты сгруппированные по дате:месяц,год
+     * @param string $date
+     * @return string
+     */
+    public function postsByDate ($date)
+    {
+        $this->title = 'Архив';
+        
+        $posts = Post::actual()
+            ->whereMonth('created_at', date('m', strtotime($date)))
+            ->whereYear('created_at', date('Y', strtotime($date)))
+            ->paginate(4);
+        
+        return view('layouts.primary', [
+            'page'=> 'pages.archive',
+            'title' => $this->title,
+            'posts' => $posts,
+            'archive' => $date,
+            'data' => $this->data,
+        ]);
+        
+        
+    }
+    
+    /**
+     * Страниа создания поста
+     * @return string
+     */
     public function create()
     {
         if (Gate::denies('post_create')) {
@@ -113,31 +148,45 @@ class PostController extends MainController
         ]);
     }
     
-    public function createPost(FormPostRequest $request)
+    /**
+     * Обработка формы создания поста
+     * @param PostFormRequest $request
+     * @param Uploader $uploader
+     * @return void
+     */
+    public function createPost(PostFormRequest $request, Uploader $uploader)
     {
         
         if (Gate::denies('post_create')) {
             abort(403);
         }
+                
+        $tags = $this->getTags($request->input('tags.*'));
         
         $post = Post::create([
                         'user_id' => $request->input('user_id'),
                         'title' => $request->input('title'),
-                        'image' => '',
+                        'image' => $uploader->processUpload($request),
                         'slug' => url_slug($request->input('title')),
                         'announce' => $request->input('announce'),
                         'fulltext' => $request->input('fulltext'),
-                        'active_from' => $request->input('active_from', Carbon::now()),
+                        'active_from' => $request->input('active_from') !== null ? $request->input('active_from') : Carbon::now(),
                         'active_to' => $request->input('active_to'),
                    ]);
         
         $post->categories()->attach([$request->input('category')]);
+        $post->tags()->attach($tags);
        
         return redirect()
             ->route('mainPage')
             ->with('action', 'Пост добавлен');
     }
     
+    /**
+     * Страница удаления поста
+     * @param object $post
+     * @return string
+     */
     public function edit($post)
     {
         $this->authorize('edit', $post);
@@ -155,21 +204,31 @@ class PostController extends MainController
         ]);
     }
     
-    public function editPost($post, FormEditPostRequest $request)
+    /**
+     * Обработка формы редактирования поста
+     * @param object $post
+     * @param EditPostFormRequest $request
+     * @param Uploader $uploader
+     * @return void
+     */
+    public function editPost($post, EditPostFormRequest $request, Uploader $uploader)
     {
         $this->authorize('edit', $post);
+        
+        $tags = $this->getTags($request->input('tags.*'));
         
         $post->update([
                         'user_id' => $request->input('user_id'),
                         'title' => $request->input('title'),
-//                        'image' => '',
+                        'image' => $uploader->processUpload($request),
                         'slug' => url_slug($request->input('title')),
                         'announce' => $request->input('announce'),
                         'fulltext' => $request->input('fulltext'),
-                        'active_from' => $request->input('active_from', Carbon::now()),
+                        'active_from' => $request->input('active_from') !== null ? $request->input('active_from') : Carbon::now(),
                         'active_to' => $request->input('active_to'),
                 ]);
         
+        $post->tags()->sync($tags);
         try{
             $post->categories()->attach([$request->input('category')]);
         } catch (\Exception $e){}    
@@ -179,6 +238,11 @@ class PostController extends MainController
             ->with('action', 'Пост обновлен');
     }
     
+    /**
+     * Удаление поста
+     * @param object $post
+     * @return void
+     */
     public function delete($post)
     {
         $this->authorize('delete', $post);
@@ -190,17 +254,15 @@ class PostController extends MainController
             ->with('action', 'Пост удален');
     }
     
-    public function createComment(Request $request)
+    /**
+     * Обработка формы создания комментария
+     * @param CommentFormRequest $request
+     * @return void
+     */
+    public function createComment(CommentFormRequest $request)
     {
         $post = Post::find(session('post_id'));
-         
-        $this->validate($request, [
-            'title' => 'required|max:255',
-            'comment' => 'required',
-            'post_id' => 'in:'. $post->id,
-            'user_id' => 'in:'. Auth::user()->id,
-        ]);
-        
+               
         $post->comments()->create([
             'title' => $request->input('title'),
             'slug'=> url_slug($request->input('title')),
@@ -211,15 +273,29 @@ class PostController extends MainController
         ]);
         
         return redirect()
-            ->route('post.show', $post->id)
+            ->route('post.show', $post->slug)
             ->with('comment_add_success', 'Комментарий добавлен!');
     }
     
- 
+    /**
+     * Счетчик просмотров
+     * @param object $object
+     */
     private function viewsCountAdd ($object)
     {
         $object->update(['views_count' => $object->views_count + 1]); 
     }
     
-        
+    private function getTags($tags)
+    {
+        $arr_tags = [];
+        for ($i=0; $i< count($tags); $i++){
+            $tag = Tag::firstOrCreate([
+                'name' => $tags[$i],
+            ]);
+            $arr_tags[] = $tag->id; 
+        }
+        return $arr_tags; 
+    }
+               
 }

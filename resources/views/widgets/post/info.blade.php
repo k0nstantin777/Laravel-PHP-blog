@@ -1,11 +1,15 @@
 <div class="post-info">
         <ul>
             <span>Тэги</span>
-            @foreach ($post->tags as $tag)
-            <a href="{{route('post.tag.show', $tag->name)}}">
-                <li><i class="fa fa-tags" aria-hidden="true"></i> {{$tag->name}}</li>
-            </a>
-            @endforeach
+            @if($post->tags->count() === 0)
+                <li>Нет привязанных тегов</li>
+            @else
+                @foreach ($post->tags as $tag)
+                <a href="{{route('post.tag.show', $tag->name)}}">
+                    <li><i class="fa fa-tags" aria-hidden="true"></i> {{$tag->name}}</li>
+                </a>
+                @endforeach
+            @endif    
         </ul> 
         <ul>
             <span>Категории</span>

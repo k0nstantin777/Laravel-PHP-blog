@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
-class FormRegisterRequest extends FormRequest
+class PostFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +25,14 @@ class FormRegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:255|min:3',
-            'email' => 'required|unique:users|email|max:255',
-            'pass' => 'required|max:40|min:6',
-            'pass_repeat' => 'required|same:pass',
-            'phone' => 'regex:/\+\d{1}\s{1}\(\d{3}\)\s{1}\d{3}\-\d{2}\-\d{2}/',
-            'is_confirm' => 'accepted'
+            'title' => 'required|max:255|min:3|unique:posts',
+            'announce' => 'required',
+            'fulltext' => 'required',
+            'user_id' => 'required|in:'.Auth::user()->id,
+            'active_from' => 'date|nullable',
+            'active_to' => 'date|nullable',
+            'image' => 'image',
+            'tag.*' => 'array'
         ];
     }
 }

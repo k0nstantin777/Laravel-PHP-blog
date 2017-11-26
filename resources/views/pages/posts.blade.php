@@ -13,6 +13,9 @@
 
     </article>
     @endforeach
+    
+    {{$posts->links()}}
+    
 @endif    
 
 

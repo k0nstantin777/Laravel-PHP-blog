@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 class Post extends Model
 {
@@ -22,6 +23,16 @@ class Post extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+    
+    public function scopeActual($query)
+    {
+        return $query->where('is_active', 1)
+                ->where('active_from', '<' , Carbon::now())
+                ->where(function($q){
+                    $q->where('active_to', '>' , Carbon::now())
+                      ->orWhere('active_to', null);
+                });    
     }
     
     /**

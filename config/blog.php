@@ -2,11 +2,12 @@
 
 
 return [
-    'uploadPath' => storage_path() . '/uploads/',
+    'uploadPath' => public_path() . '/userfiles/',
     'defaultUploadSection' => 'files',
     'imageUploadSection' => 'images',
     'docsUploadSection' => 'docs',
-    'imageDefaultPath' => storage_path() . '/default.jpg',
+    'imageDefaultPath' => 'img-post.jpg',
     'storagePermissions' => 0755,
     'imageCacheTime' => 86400,
+    'userImagesPath' => 'userfiles/images/',
 ];

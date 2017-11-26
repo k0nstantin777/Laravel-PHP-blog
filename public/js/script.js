@@ -15,9 +15,45 @@ $(document).ready(function() {
     
     setActiveItemMenu();
     menuChangeItems();
-
+    previewImage();
     
+    
+     getCountTags();
+    
+//    $('#plus_tag').each(function (){
+//        $(this).click(function(){
+//            count_tag++;
+//            div = $(this).parent('div.tags');
+//            $(div).clone(true).appendTo('div.tag_block');
+//        });
+//         if (count_tag === 1){
+//           $('.remove_tag').css('display', 'none');
+//        }else {
+//           $('.remove_tag').css('display', 'block');
+//        }
+//    });
+    $('.plus_tag').click(function(){
+        div = $(this).parent('div');
+        $(div).clone(true).appendTo('.tag_block');
+        getCountTags();
+    });
+        
+    $('.remove_tag').click(function(){
+       div = $(this).parent('div').remove();
+       getCountTags();
+    });
+     
 });
+
+function getCountTags(){
+    var count_tag = $('div .tags').length;
+    if (count_tag === 1){
+        $('.remove_tag').css('display', 'none');
+    }else {
+        $('.remove_tag').css('display', 'block');
+    }
+    console.log(count_tag);
+}
 
 function setActiveItemMenu(){
     var uri = getUri(document.location.href);
@@ -57,4 +93,32 @@ function getUri (uri){
     } 
     
     return uri;
+}
+
+/**
+* preview images
+*/
+function previewImage() {
+    
+    $('#image').change(function () {
+    var input = $(this)[0];
+        if (input.files && input.files[0]) {
+            if (input.files[0].type.match('image.*')) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#img-preview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                console.log('error input file');
+            }
+        } else {
+            console.log('error input file');
+        }
+    });
+ 
+    $('#reset-img-preview').click(function() {
+        $('#img').val('');
+        $('#img-preview').attr('src', 'images/img-post.jpg');
+    });
 }

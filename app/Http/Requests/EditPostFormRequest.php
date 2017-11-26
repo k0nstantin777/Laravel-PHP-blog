@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use App\Models\Post;
 
-class FormEditPostRequest extends FormRequest
+class EditPostFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -36,7 +36,8 @@ class FormEditPostRequest extends FormRequest
             'post_id' => 'required|in:'.$post->id,
             'active_from' => 'date|nullable',
             'active_to' => 'date|nullable',
-            //'image' => 'image'
+            'image' => 'image',
+            'tag.*' => 'min:3|max:15'
         ];
     }
 }
