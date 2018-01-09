@@ -1,4 +1,4 @@
-<div class="about-me">
+<div class="about-me col-xs-10 col-xs-offset-1">
 
         <h3>Обо мне</h3>
 

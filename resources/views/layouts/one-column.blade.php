@@ -6,10 +6,10 @@
 
 
 @section('content')
-    <div id="content-wrap">
+    <div id="content-wrap" class="container">
         <!-- content -->
         
-            <div id="center">
+            <div id="center" class="row col-xs-10 col-xs-offset-1">
                 @section('main')
                 @show
             </div>

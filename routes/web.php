@@ -85,3 +85,5 @@ Route::group(['prefix' => '/category'], function(){
             ->name('category.show')
             ->where('slug', '[a-zA-Z0-9-]+');
 });  
+
+Route::get('/vue', 'PageController@vueTest');

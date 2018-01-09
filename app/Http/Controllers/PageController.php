@@ -78,4 +78,13 @@ class PageController extends MainController
             'categories' => $categories
         ]); 
     }
+    
+    public function vueTest()
+    {
+        return view('layouts.primary', [
+            'page'=>'pages.vue',
+            'title'=> 'Тест Vue.js',
+           
+        ]); 
+    }
 }

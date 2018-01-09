@@ -2,26 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-<<<<<<< HEAD
-            <file>file:/home/bumer/www/laravel.loc/app/Providers/AppServiceProvider.php</file>
-            <file>file:/home/bumer/www/laravel.loc/resources/views/widgets/sidebar/categories.blade.php</file>
-            <file>file:/home/bumer/www/laravel.loc/.env</file>
-            <file>file:/home/bumer/www/laravel.loc/app/Http/Controllers/PostController.php</file>
-            <file>file:/home/bumer/www/laravel.loc/resources/views/widgets/footer/menu.blade.php</file>
-=======
-            <file>file:/home/bumer/www/laravel.loc/resources/views/widgets/forms/create.blade.php</file>
-            <file>file:/home/bumer/www/laravel.loc/public/js/script.js</file>
-            <file>file:/home/bumer/www/laravel.loc/resources/views/parts/post.blade.php</file>
-            <file>file:/home/bumer/www/laravel.loc/resources/views/pages/post.blade.php</file>
-            <file>file:/home/bumer/www/laravel.loc/config/blog.php</file>
-            <file>file:/home/bumer/www/laravel.loc/app/Includes/Classes/Uploader.php</file>
-            <file>file:/home/bumer/www/laravel.loc/public/css/coolblue.css</file>
-            <file>file:/home/bumer/www/laravel.loc/.env</file>
-            <file>file:/home/bumer/www/laravel.loc/app/Http/Controllers/PostController.php</file>
->>>>>>> 73edbd5cd0fe75c1b9046796aafb3c3346c3b750
-            <file>file:/home/bumer/www/laravel.loc/routes/web.php</file>
-            <file>file:/home/bumer/www/laravel.loc/resources/views/pages/posts.blade.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

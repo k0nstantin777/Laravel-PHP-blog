@@ -162,6 +162,7 @@ class PostController extends MainController
                 
         $tags = $this->getTags($request->input('tags.*'));
         
+        
         $post = Post::create([
                         'user_id' => $request->input('user_id'),
                         'title' => $request->input('title'),
@@ -174,7 +175,9 @@ class PostController extends MainController
                    ]);
         
         $post->categories()->attach([$request->input('category')]);
-        $post->tags()->attach($tags);
+        if (!empty($tags)){
+            $post->tags()->attach($tags);
+        }    
        
         return redirect()
             ->route('mainPage')
@@ -226,8 +229,9 @@ class PostController extends MainController
                         'active_from' => $request->input('active_from') !== null ? $request->input('active_from') : Carbon::now(),
                         'active_to' => $request->input('active_to'),
                 ]);
-        
-        $post->tags()->sync($tags);
+        if (!empty($tags)){
+            $post->tags()->sync($tags);
+        }
         try{
             $post->categories()->attach([$request->input('category')]);
         } catch (\Exception $e){}    
@@ -288,8 +292,11 @@ class PostController extends MainController
     private function getTags($tags)
     {
         $arr_tags = [];
-
+                
         for ($i=0; $i< count($tags); $i++){
+            if ($tags[$i] === null){
+                continue;
+            }
             $tag = Tag::firstOrCreate([
                 'name' => $tags[$i],
             ]);

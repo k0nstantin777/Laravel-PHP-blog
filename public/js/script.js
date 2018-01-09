@@ -52,7 +52,7 @@ function getCountTags(){
     }else {
         $('.remove_tag').css('display', 'block');
     }
-    console.log(count_tag);
+    //console.log(count_tag);
 }
 
 function setActiveItemMenu(){

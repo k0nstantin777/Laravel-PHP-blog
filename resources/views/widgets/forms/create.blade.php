@@ -5,10 +5,10 @@
     <input type="hidden" name="user_id" value="{{$currentUser->id}}" />
     
     <label for="name">Автор<span class="required">*</span></label>
-    <input  id="name" name="name" type="text" value="{{$currentUser->name}}" disabled /> 
+    <input  id="name" name="name" type="text" value="{{$currentUser->name}}" disabled class="col-xs-12" /> 
            
     <label for="title">Тема поста<span class="required">*</span></label>
-    <input id="title" name="title" placeholder="Тема поста" value="{{ old('title') }}" {{$errors->has('title') ? 'class=error':'' }} />
+    <input id="title" name="title" placeholder="Тема поста" value="{{ old('title') }}" class="col-xs-12 {{$errors->has('title') ? 'class=error':'' }}" />
         @if($errors->has('title'))
             <div>
                 <span class="error">{{$errors->first('title')}}</span>
@@ -25,7 +25,7 @@
     </div>
     
     <label for="announce">Анонс поста<span class="required">*</span></label>
-    <textarea id="announce" name="announce" placeholder="Аннонс поста" {{$errors->has('announce') ? 'class=error':'' }}  >{{ old('announce') }}</textarea>
+    <textarea id="announce" name="announce" placeholder="Аннонс поста" class="col-xs-12 {{$errors->has('announce') ? 'class=error':'' }}"  >{{ old('announce') }}</textarea>
         @if($errors->has('announce'))
             <div>
                 <span class="error">{{$errors->first('announce')}}</span>
@@ -33,7 +33,7 @@
         @endif    
     
     <label for="body">Текст поста<span class="required">*</span></label>
-    <textarea id="body" name="fulltext" placeholder="Текст поста" {{$errors->has('fulltext') ? 'class=error':'' }}  >{{ old('fulltext') }}</textarea>
+    <textarea id="body" name="fulltext" placeholder="Текст поста" class="col-xs-12 {{$errors->has('fulltext') ? 'class=error':'' }}"  >{{ old('fulltext') }}</textarea>
         @if($errors->has('fulltext'))
             <div>
                 <span class="error">{{$errors->first('fulltext')}}</span>

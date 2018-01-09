@@ -3,7 +3,7 @@
  {{ csrf_field() }}
 
     <label for="name">Имя</label>
-    <input  id="name" name="name" type="text" placeholder="Ivan" value="{{ old('name') }}" {{$errors->has('name') ? 'class=error':'' }} autofocus />
+    <input  id="name" name="name" class="col-xs-12 {{$errors->has('name') ? 'error':'' }}" type="text" placeholder="Ivan" value="{{ old('name') }}"  autofocus />
         @if($errors->has('name'))
             <div>
                 <span class="error">{{$errors->first('name')}}</span>
@@ -11,7 +11,7 @@
         @endif
 
     <label for="email">E-mail</label>
-    <input id="email" name="email" type="text" placeholder="ivan@mail.ru" value="{{ old('email') }}" {{$errors->has('email') ? 'class=error':'' }} /> 
+    <input id="email" name="email" class="col-xs-12 {{$errors->has('email') ? 'error':'' }}" type="text" placeholder="ivan@mail.ru" value="{{ old('email') }}" /> 
         @if($errors->has('email'))
             <div>
                 <span class="error">{{$errors->first('email')}}</span>
@@ -19,7 +19,7 @@
         @endif
 
     <label for="pass">Пароль</label>
-    <input type="password" id="pass" name="pass" placeholder="Пароль" value="{{ old('pass') }}" {{$errors->has('pass') ? 'class=error':'' }} />
+    <input type="password" id="pass" class="col-xs-12 {{$errors->has('pass') ? 'error':'' }}" name="pass" placeholder="Пароль" value="{{ old('pass') }}"  />
         @if($errors->has('pass'))
             <div>
                 <span class="error">{{$errors->first('pass')}}</span>
@@ -28,14 +28,14 @@
 
 
     <label for="pass_repeat">Повторите пароль</label>
-    <input type="password" id="pass_repeat" name="pass_repeat" placeholder="Повторите пароль" value="{{ old('pass_repeat') }}" {{$errors->has('pass_repeat') ? 'class=error':'' }} />
+    <input type="password" id="pass_repeat" class="col-xs-12 {{$errors->has('pass_repeat') ? 'error':'' }}" name="pass_repeat" placeholder="Повторите пароль" value="{{ old('pass_repeat') }}" />
         @if($errors->has('pass_repeat'))
             <div>
                 <span class="error">{{$errors->first('pass_repeat')}}</span>
             </div>
         @endif  
 
-    <input type="checkbox" id="confirm" name="is_confirm" value="yes" {{ old('remember') ? 'checked' : '' }}/>
+    <input type="checkbox" id="confirm" name="is_confirm" value="yes" {{ old('is_confirm') ? 'checked' : '' }}/>
     <label id="confirm" for="confirm">Согласен с условиями сайта</label>
         @if($errors->has('is_confirm'))
         <div>

@@ -17,16 +17,18 @@
     <link rel="shortcut icon" href="images/favicon.ico"/>
     <link rel="stylesheet" type="text/css" media="screen" href="css/coolblue.css" />
     <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     
 
     <!--[if lt IE 9]>
 	    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+<!--    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/jquery-1.6.1.min.js"><\/script>')</script>
-
-    <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
+    
+    
     @yield('head_styles')
         
     @yield('head_scripts')
@@ -34,22 +36,32 @@
 </head>
 
 <body id="top">
+    <div class="container">
+        <div class="row col-sm-12">
+        <!--header -->
+        @yield('header')
+        <!--/header-->
+        </div>
+        <div class="row col-sm-12">
+        <!-- content-wrap -->
+        @yield('content')
+        <!-- /content-out -->
+        </div>
+        <div class="row col-sm-12">
+        <!-- extra -->
+        @yield('footer_first')
+        <!-- /extra -->
+        </div>
+        <div class="row col-sm-12">
+        <!-- footer -->
+        @yield('footer_second')
+        <!-- /footer -->
+        </div>
+    </div>
 
-<!--header -->
-@yield('header')
-<!--/header-->
-	
-<!-- content-wrap -->
-@yield('content')
-<!-- /content-out -->
-
-<!-- extra -->
-@yield('footer_first')
-<!-- /extra -->
-
-<!-- footer -->
-@yield('footer_second')
-<!-- /footer -->
+<!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
 

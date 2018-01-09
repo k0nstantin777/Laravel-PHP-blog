@@ -6,17 +6,19 @@
 
 
 @section('content')
-    <div id="content-wrap">
+    <div id="content-wrap" class="container">
         <!-- content -->
-        <div id="content" class="clearfix">
+        <div id="content" class="row">
             <!-- main -->
-            <div id="main">
+            <div id="main"  >
+                <div class="col-lg-9 col-md-8 col-sm-12">
                 @section('main')
                 @show
+                </div>
             </div>
             <!-- /main -->
             <!-- sidebar -->
-            <div id="sidebar">
+            <div id="sidebar" class="col-lg-3 col-md-4 col-sm-12">
                 @section('sidebar')
                 @show
             </div>

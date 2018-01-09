@@ -44,9 +44,5 @@ class FooterComposer
                         ->get();
         });    
         $view->with('archives', $archives);
-<<<<<<< HEAD
-        
-=======
->>>>>>> 73edbd5cd0fe75c1b9046796aafb3c3346c3b750
     }
 }
